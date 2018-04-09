@@ -28,20 +28,26 @@ I needed a name for this thing for GitHub. It's definitely smaller than a microf
 All you need in the HTML is some containers for the content. For exmaple
 
 ```
-<h1 id='title'>Title</h1>
-<p id='content'></p>
+<div id='part1></div>
+<div id='part2'></div>
 ```
 
-Suppose you set up the app to originally render _initial.md_ into the `<p>` tag:
+Suppose you set up the app to originally render _initial.md_ into `#part2`:
+
+_initial.md_
+```
+# Title
+Some content including a [link](#source=content/other.md&target=part2)
+```
 
 ```
-<p id='content'>Some content including a [link](#source=content/other.md&target=content</p>
+<p id='content'>Some content including a <a href="#source=content/other.md&target=part2">link</a></p>
 ```
 
-First atto catches the link-click and stops the default behavior which would trigger a page reload. The DOM has an event `hashchange` that tells when the hash has changed regardless of a page reload. So, without reloading the page, atto can grab `window.location.hash` and render the new content. The query in the hash tells atto to AJAX the code from _http://<website>/content/other.md_, render into HTML, and stick it in the element with id _#content_.
+First atto catches the link-click and stops the default behavior which would trigger a page reload. The DOM has an event `hashchange` that tells when the hash has changed regardless of a page reload. So, without reloading the page, atto can grab `window.location.hash` and render the new content. The query in the hash tells atto to AJAX the code from _http://\[........\]/content/other.md_, render it into HTML, and stick it in the element with id _#content_.
 
-That's the basics. I'm working on a simple plugin system, which I used to create the responsive nav in my website. I also want to include optional routing so you could pre-define the queries into link shortcuts such as `[link](other)`.
+That's basically all there is to it. I'm working on a simple plugin system, which I used to create the responsive nav in my website. I also want to include optional routing so you could pre-define the queries into link shortcuts such as `[link](other)`.
 
-The entire app is contained in single JavaScript file of (currently) around 250 lines, at least half of which are comments, that contains two classes.
+The entire app is contained in single JavaScript file of (currently) around 250 lines, at least half of which are comments.
 
 That's as far as I plan to take it. At least I hope so. Otherwise it will grow into a femto-framework, burgeon into a pico-framework, and finally bloat into a micro-framework. And who wants that?
