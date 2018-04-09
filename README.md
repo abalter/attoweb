@@ -1,3 +1,5 @@
+**Note** This currently (04/09/2018) does not work as I'm in the middle of building this out from my actual website. If you are interested, you can visit my [personal website](arielbalter.com) to see it in action.
+
 # AttoWeb
 A ridiculously small, pseudo-dynamic, fully client-side web framerwork with a RESTful API.
 
