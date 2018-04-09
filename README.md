@@ -28,7 +28,7 @@ I needed a name for this thing for GitHub. It's definitely smaller than a microf
 All you need in the HTML is some containers for the content. For exmaple
 
 ```
-<div id='part1></div>
+<div id='part1'></div>
 <div id='part2'></div>
 ```
 
@@ -40,11 +40,13 @@ _initial.md_
 Some content including a [link](#source=content/other.md&target=part2)
 ```
 
+becomes
+
 ```
 <p id='content'>Some content including a <a href="#source=content/other.md&target=part2">link</a></p>
 ```
 
-First atto catches the link-click and stops the default behavior which would trigger a page reload. The DOM has an event `hashchange` that tells when the hash has changed regardless of a page reload. So, without reloading the page, atto can grab `window.location.hash` and render the new content. The query in the hash tells atto to AJAX the code from _http://\[........\]/content/other.md_, render it into HTML, and stick it in the element with id _#content_.
+When you click on the link, first atto catches the _click_ event and stops the default behavior which would trigger a page reload. The DOM has an event `hashchange` that tells when the hash has changed regardless of a page reload. So, without reloading the page, atto can grab `window.location.hash` and render the new content. The query in the hash tells atto to AJAX the code from _http://\[........\]/content/other.md_, render it into HTML, and stick it in the element with id _#content_.
 
 That's basically all there is to it. I'm working on a simple plugin system, which I used to create the responsive nav in my website. I also want to include optional routing so you could pre-define the queries into link shortcuts such as `[link](other)`.
 
