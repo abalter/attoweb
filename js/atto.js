@@ -1,14 +1,15 @@
 class Atto
 {
-    constructor(default_content, initial_content, routes)
+    constructor(configs)
     {
         console.log("Atto.constructor");
 
-        this.default_content = default_content;
-        console.log(this.default_content);
-        this.initial_content = initial_content;
-        this.routes = routes;
-        this.initializeApp();
+        this.plugins = configs.plugins;
+        this.routes = configs.routes;
+        this.default_content = configs.default_content;
+        this.initial_content = configs.initial_content;
+
+        //this.initializeApp();
     }
 
     initializeApp()
@@ -70,6 +71,35 @@ class Atto
             this.updatePage(url.query);
         }
 
+        // run plugins
+        for (let plugin of this.plugins)
+        {
+
+            console.log(`setting up plugin ${plugin}`);
+
+            var css_filename = `plugins/${plugin}/${plugin}.css`;
+            console.log(`css_filename=${css_filename}`);
+
+            var js_filename = `plugins/${plugin}/${plugin}.js`;
+            console.log(`js_filename=${js_filename}`);
+
+            $.getScript(js_filename);
+
+            $.get(css_filename,(data, status) =>
+            {
+                console.log(data);
+                console.log(status);
+                $("<link/>",
+                {
+                    rel: "stylesheet",
+                    type: "text/css",
+                    href: css_filename
+                })
+                .appendTo("head");
+            });
+
+        }
+
     }
 
     updatePage(query_obj)
@@ -87,6 +117,12 @@ class Atto
         // ajax down the markdown file, render to html,
         // place in page
         console.log(query_obj);
+
+        if (typeof this.routes != 'undefined' && query_obj.source in this.routes)
+        {
+            query_obj.target = this.routes[query_obj.target];
+            console.log(query_obj);
+        }
 
         if ('source' in query_obj && 'target' in query_obj)
         {

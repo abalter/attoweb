@@ -41,4 +41,6 @@ function configureNav()
     });
 }
 
-export default configureNav;
+configureNav();
+
+// export default configureNav;
