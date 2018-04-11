@@ -2,13 +2,12 @@ console.log('nav.js');
 
 function configureNav()
 {
-    //alert("configuring nav");
     console.log("configuring nav");
 
-    let menu_toggle = $('#banner').find('h2:contains("menu")');
+    let menu_toggle = $('#nav').find('h2:contains("menu")');
     $(menu_toggle).addClass('menu-toggle')
 
-    let nav_items = $('#banner').find('ul');
+    let nav_items = $('#nav').find('ul');
     $(nav_items).addClass('nav-items');
 
     $('.menu-toggle').on('click', (e) =>

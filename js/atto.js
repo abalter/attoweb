@@ -16,7 +16,7 @@ class Atto
     {
         // Sets up
         console.log("Atto.initializeApp");
-        console.log(this.default_content);
+        // console.log(this.default_content);
 
         let $self = this;
 
@@ -29,11 +29,11 @@ class Atto
         $(window).on('hashchange', function()
         {
           console.log('hashchange');
-          console.log($self);
-          console.log("href = " + window.location.href);
+        //   console.log($self);
+        //   console.log("href = " + window.location.href);
           let url = new URL(window.location.href);
-          console.log(url);
-          console.log(url.query_object);
+        //   console.log(url);
+        //   console.log(url.query_object);
           $self.updatePage(url.query_object);
         });
     }
@@ -41,7 +41,6 @@ class Atto
     initializePage()
     {
         console.log("Atto.initializePage");
-        this.insertHTML('a','b');
 
         // Since this is a new request, place all of the default
         // content.
@@ -75,20 +74,20 @@ class Atto
         for (let plugin of this.plugins)
         {
 
-            console.log(`setting up plugin ${plugin}`);
+            // console.log(`setting up plugin ${plugin}`);
 
             var css_filename = `plugins/${plugin}/${plugin}.css`;
-            console.log(`css_filename=${css_filename}`);
+            // console.log(`css_filename=${css_filename}`);
 
             var js_filename = `plugins/${plugin}/${plugin}.js`;
-            console.log(`js_filename=${js_filename}`);
+            // console.log(`js_filename=${js_filename}`);
 
             $.getScript(js_filename);
 
             $.get(css_filename,(data, status) =>
             {
-                console.log(data);
-                console.log(status);
+                // console.log(data);
+                // console.log(status);
                 $("<link/>",
                 {
                     rel: "stylesheet",
@@ -116,11 +115,14 @@ class Atto
         // processing must be handled in the callback.
         // ajax down the markdown file, render to html,
         // place in page
-        console.log(query_obj);
+        // console.log(query_obj);
 
         if (typeof this.routes != 'undefined' && query_obj.source in this.routes)
         {
-            query_obj.target = this.routes[query_obj.target];
+            console.log('routes');
+            let {source, target} = query_obj;
+            console.log(`source=${source} target=${target}`);
+            query_obj.source = this.routes[source].path + "/" + this.routes[source].source;
             console.log(query_obj);
         }
 
@@ -133,11 +135,11 @@ class Atto
 
             return $.get(source, function(markdown, status)
             {
-                console.log(markdown);
+                // console.log(markdown);
 
                 // render the markdown to HTML
                 let html = marked(markdown);
-                console.log("printing html");
+                // console.log("printing html");
                 console.log(html);
 
                 // insert in to page
@@ -167,8 +169,8 @@ class Atto
         console.log("insertHTML");
         console.log("target=" + target);
         let target_parts = target.split('.');
-        console.log("target parts: " + JSON.stringify(target_parts));
-        console.log("first part: " + target_parts[0]);
+        // console.log("target parts: " + JSON.stringify(target_parts));
+        // console.log("first part: " + target_parts[0]);
         let target_element = $('#' + target_parts[0]);
         console.log("first element");
         console.log(target_element);
@@ -177,7 +179,7 @@ class Atto
             console.log("more parts");
             for (let next_element of target_parts.slice(1, ))
             {
-                console.log("next_element: " + next_element);
+                // console.log("next_element: " + next_element);
                 target_element = $(target_element).find('#' + next_element);
             }
         }
@@ -199,7 +201,7 @@ class Atto
             console.log("setting click event");
             e.preventDefault();
             let href = $(this).attr('href');
-            console.log(`link href=${href}`);
+            // console.log(`link href=${href}`);
 
             // Update the hash with new request
             window.location.hash = href;
@@ -236,10 +238,10 @@ class URL
     getQueryPart()
     {
         console.log("URL.getQueryPart");
-        console.log(this.url);
+        // console.log(this.url);
 
         var query = window.location.hash.replace(/^#/, '');
-        console.log("query = " + query);
+        // console.log("query = " + query);
 
         return query;
     }
@@ -247,13 +249,13 @@ class URL
     parseQuery()
     {
         console.log("URL.parseQuery");
-        console.log(`query=${this.query}`);
+        // console.log(`query=${this.query}`);
 
         // We now parse the query.
         // First separate the query into individual sub-queries by splitting
         // on "&"
         let query_list = this.query.split('&');
-        console.log("query_list=" + JSON.stringify(query_list));
+        // console.log("query_list=" + JSON.stringify(query_list));
         // Then create a list of the sub-queries
         //
         // initialize an dummy object
@@ -262,9 +264,9 @@ class URL
         this.query_object = {};
         query_list.forEach((item, index) =>
         {
-            console.log("index=" + index + " item=" + item);
+            // console.log("index=" + index + " item=" + item);
             let parts = item.split('=');
-            console.log("parts " + JSON.stringify(parts));
+            // console.log("parts " + JSON.stringify(parts));
             // A string such as "a=b" splits to ['a','b'].
             // So the subquery looks like
             // {split[0] : split[1]} equiv. {a : b}
@@ -272,7 +274,7 @@ class URL
             let value = parts[1];
             this.query_object[key] = value;
         });
-        console.log(this.query_object);
+        // console.log(this.query_object);
         return this.query_object;
     }
 }

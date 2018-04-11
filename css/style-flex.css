@@ -5,13 +5,11 @@ html {
   --dark-color: #55552b;
   background: #77777;
   font-size: 100%;
-    margin: 0 auto;
   width: 100vw;
 }
 body {
   font-family: "Open Sans", sans-serif;
   margin: 0 auto;
-  width: 100vw;
 }
 h1, h2 {
   font-family: Bitter, sans-serif;
@@ -25,6 +23,51 @@ h1 {
 h2 {
   font-size: 1.4rem;
 }
+#outer-container {
+    display: flex;
+    flex-direction: column;
+    /*border: 1px solid black;*/
+    width: 100%;
+
+}
+#inner-container {
+    display: flex;
+    flex-direction: row;
+    /*border: 1px dotted back;*/
+}
+#nav {
+    flex-basis: 100vw;
+    flex: 0;
+    background: #000;
+    color: #fff;
+}
+#left-sidebar {
+    flex: 1 0;
+    /*border: 1px solid red;*/
+    padding: 0 1em;
+    background: #eee;
+
+}
+#right-sidebar {
+    flex: 1 0;
+    /*border: 1px solid green;*/
+    padding: 0 1em;
+    background: #eee;
+}
+#main {
+    flex: 3 3;
+    /*border: 1px dotted blue;*/
+    padding: 0 1em;
+}
+#footer {
+    flex-basis: 100vw;
+    flex: 0;
+    text-align: center;
+    background: #000;
+    color: #eee;
+}
+
+
 #left-sidebar img {
   width: 100%;
 }
@@ -33,13 +76,12 @@ figure {
   margin: 0;
 }
 ul, ol {
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 ul {
-  list-style-type: disc;
+  /*list-style-type: disc;*/
 }
 li {
-  text-indent: 0em;
 }
 hr {
   display: block;
@@ -74,48 +116,14 @@ a:hover {
   color: var(--dark-color);
   font-weight: 900;
 }
-.container {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    border: 1px dashed blue;
-}
-#left-sidebar {
-  grid-area: left-sidebar;
-  min-width: 240px;
-  background: #aaa;
-  padding: 1rem;
-}
-#left-sidebar img {
-  width: 100%;
-}
-#main {
-  grid-area: main;
-  min-width: 360px;
-  max-width: 800px;
-}
-#right-sidebar {
-  grid-area: right-sidebar;
-}
-#footer {
-    grid-area: footer;
-}
-#nav {
-    grid-area: nav;
-}
+
 @media (max-width: 800px){
   .container {
-      display: grid;
-      grid-template-columns: 2fr 4fr;
-      grid-template-areas: 'left-sidebar main';
+
    }
   #left-sidebar {
-    grid-area: left-sidebar;
-    min-width: inherit;
   }
   #main {
-    grid-area: main;
     min-width: inherit;
   }
   #right-sidebar {
@@ -130,11 +138,6 @@ a:hover {
         font-size: 1.4rem;
     }
   .container {
-    grid-template-columns: 100%;
-    grid-template-rows: auto auto;
-    grid-template-areas:
-      'left-sidebar'
-      'main';
   }
 }
 
