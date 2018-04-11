@@ -24,7 +24,10 @@ var default_content =
 console.log("default_content");
 // console.log(default_content);
 
-var initial_content = {target: 'main', source: 'content/main-page.md'};
+var initial_content =
+{
+    target: 'main', source: 'content/main-page.md'
+};
 
 var configs =
 {
@@ -45,6 +48,7 @@ var docWidth = document.documentElement.offsetWidth;
   function(el) {
     if (el.offsetWidth > docWidth) {
       console.log(el);
+      alert("too wide");
     }
   }
 );

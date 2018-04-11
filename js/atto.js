@@ -46,7 +46,7 @@ class Atto
         // content.
         console.log("processing default content");
 
-        console.log(this.default_content);
+        // console.log(this.default_content);
 
         for (let query_obj of this.default_content)
         {
@@ -121,9 +121,9 @@ class Atto
         {
             console.log('routes');
             let {source, target} = query_obj;
-            console.log(`source=${source} target=${target}`);
+            // console.log(`source=${source} target=${target}`);
             query_obj.source = this.routes[source].path + "/" + this.routes[source].source;
-            console.log(query_obj);
+            // console.log(query_obj);
         }
 
         if ('source' in query_obj && 'target' in query_obj)
@@ -140,7 +140,7 @@ class Atto
                 // render the markdown to HTML
                 let html = marked(markdown);
                 // console.log("printing html");
-                console.log(html);
+                // console.log(html);
 
                 // insert in to page
                 $self.insertHTML(html, target);
@@ -167,13 +167,13 @@ class Atto
     insertHTML(html, target)
     {
         console.log("insertHTML");
-        console.log("target=" + target);
+        // console.log("target=" + target);
         let target_parts = target.split('.');
         // console.log("target parts: " + JSON.stringify(target_parts));
         // console.log("first part: " + target_parts[0]);
         let target_element = $('#' + target_parts[0]);
-        console.log("first element");
-        console.log(target_element);
+        // console.log("first element");
+        // console.log(target_element);
         if (target_parts.length > 1)
         {
             console.log("more parts");
@@ -183,7 +183,7 @@ class Atto
                 target_element = $(target_element).find('#' + next_element);
             }
         }
-        console.log(target_element);
+        // console.log(target_element);
         target_element.html(html);
     }
 

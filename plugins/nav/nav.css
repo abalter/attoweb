@@ -1,26 +1,23 @@
 nav {
-    width: 100vw;
 }
 .nav-items {
-    width: 100vw;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgba(85, 85, 43, 0.3);
-    padding: 0.3rem 1rem 0.5rem 1rem;
+    background-color: #000;
     font-family: Bitter;
     list-style-type: none;
-    margin: 0;
     font-size: 1rem;
+    padding: 0;
 }
 .nav-items a {
     text-align: center;
     text-decoration: none;
-    color: inherit;
+    color: #fff;
 }
 .nav-items a:hover {
-    color: var(--dark-color);
-    font-weight: 900;
+    text-decoration: underline;
+    color: #fff;
 }
 .menu-toggle {
     width: 100vw;
@@ -30,7 +27,7 @@ nav {
     font-weight: 900;
     font-size: 1.5rem;
     text-align: center;
-    background-color: rgba(85, 85, 43, 0.3);
+    background-color: #000;
     padding: 0;
     margin: 0;
 }
