@@ -9,10 +9,11 @@ var username = 'abalter/';
 var reponame = 'attoweb/';
 
 var base_url = github_base + username + reponame + 'master/';
+base_url = "";
 
 var default_content =
 [
-    {source: header.md, target: header}
+    {source: "header.md", target: "header"}
 ];
 
 var initial_content =
@@ -27,11 +28,10 @@ var configs =
     base_url: base_url
 };
 
+debug_level = 2;
 $.getScript('js/atto.js', () =>
 {
     var app = new Atto(configs);
     app.initializeApp();
 });
-
-
 

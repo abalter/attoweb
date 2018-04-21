@@ -1,4 +1,4 @@
-var debug_level = 0;
+// var debug_level = 0;
 
 class Atto
 {
@@ -6,10 +6,10 @@ class Atto
     {
         debug("Atto.constructor", 1);
 
-        this.plugins = configs.plugins;
-        this.routes = configs.routes;
-        this.default_content = configs.default_content;
-        this.initial_content = configs.initial_content;
+        this.plugins = configs.plugins || [];
+        this.routes = configs.routes || [];
+        this.default_content = configs.default_content || [];
+        this.initial_content = configs.initial_content || {};
         this.base_url = configs.base_url || '';
 
         //this.initializeApp();
