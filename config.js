@@ -4,40 +4,24 @@ console.log('config.js');
 //import {Atto} from './js/atto.js';
 // using $.getScript below
 
-var plugins =
-[
-    'simple-dropdown-nav',
-];
-
 var github_base = 'https://raw.githubusercontent.com/';
 var username = 'abalter/';
 var reponame = 'attoweb/';
 
-// var base_url = github_base + username + reponame + 'master/';
-var base_url = "https://raw.githubusercontent.com/Attoweb/attoweb.org/master/";
-base_url = "";
-
-var routes =
-{
-  footer: {path: "content", source: "footer.md", target: "main"},
-};
+var base_url = github_base + username + reponame + 'master/';
 
 var default_content =
 [
-  {target: 'header', source: 'content/header.md'},
-  {target: 'nav', source: 'content/nav.md'},
-  {target: 'footer', source: 'footer'}
+    {source: header.md, target: header}
 ];
 
 var initial_content =
 {
-    target: 'main', source: 'content/about.md'
+    target: 'main', source: 'page1.md'
 };
 
 var configs =
 {
-    plugins: plugins,
-    routes: routes,
     default_content: default_content,
     initial_content: initial_content,
     base_url: base_url
