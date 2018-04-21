@@ -1,32 +1,37 @@
 console.log('config.js');
 
-import {Atto} from './js/atto.js';
+// Using a module approach works fine--except in firefox!!!
+//import {Atto} from './js/atto.js';
+// using $.getScript below
 
 var plugins =
 [
-    'nav',
-//    'blog'
+    'simple-dropdown-nav',
 ];
+
+var github_base = 'https://raw.githubusercontent.com/';
+var username = 'abalter/';
+var reponame = 'attoweb/';
+
+// var base_url = github_base + username + reponame + 'master/';
+var base_url = "https://raw.githubusercontent.com/Attoweb/attoweb.org/master/";
+base_url = "";
 
 var routes =
 {
-  footer: {path: "content", source: "footer.md"},
+  footer: {path: "content", source: "footer.md", target: "main"},
 };
 
 var default_content =
 [
+  {target: 'header', source: 'content/header.md'},
   {target: 'nav', source: 'content/nav.md'},
-  {target: 'left-sidebar', source: 'content/left-sidebar.md'},
-  {target: 'right-sidebar', source: 'content/right-sidebar.md'},
   {target: 'footer', source: 'footer'}
 ];
 
-console.log("default_content");
-// console.log(default_content);
-
 var initial_content =
 {
-    target: 'main', source: 'content/main-page.md'
+    target: 'main', source: 'content/about.md'
 };
 
 var configs =
@@ -34,21 +39,15 @@ var configs =
     plugins: plugins,
     routes: routes,
     default_content: default_content,
-    initial_content: initial_content
-}
+    initial_content: initial_content,
+    base_url: base_url
+};
 
-var app = new Atto(configs);
+$.getScript('js/atto.js', () =>
+{
+    var app = new Atto(configs);
+    app.initializeApp();
+});
 
-app.initializeApp();
 
-var docWidth = document.documentElement.offsetWidth;
 
-[].forEach.call(
-  document.querySelectorAll('*'),
-  function(el) {
-    if (el.offsetWidth > docWidth) {
-      console.log(el);
-      alert("too wide");
-    }
-  }
-);
